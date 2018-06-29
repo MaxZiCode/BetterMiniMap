@@ -26,8 +26,9 @@ namespace BetterMiniMap
         private Ships_Overlay overlayShips;
         private Robots_Overlay overlayRobots;
         private Area_Overlay overlayArea;
+		private FoundObjects_Overlay overlayFoundObjects;
 
-        private List<Overlay> overlays;
+		private List<Overlay> overlays;
 
         private int mapID = -1;
 
@@ -81,20 +82,22 @@ namespace BetterMiniMap
             this.overlayShips = new Ships_Overlay();
             this.overlayRobots = new Robots_Overlay();
             this.overlayArea = new Area_Overlay();
+			this.overlayFoundObjects = new FoundObjects_Overlay();
 
-            this.overlays = new List<Overlay>()
-            {
-                this.overlayTerrain,
-                this.overlayColonists,
-                this.overlayMining,
-                this.overlayNoncolonist,
-                this.overlayBuilding,
-                this.overlayPower,
-                this.overlayWild,
-                this.overlayShips,
-                this.overlayRobots,
-                this.overlayFog,
-                this.overlayView
+			this.overlays = new List<Overlay>()
+			{
+				this.overlayTerrain,
+				this.overlayColonists,
+				this.overlayMining,
+				this.overlayNoncolonist,
+				this.overlayBuilding,
+				this.overlayPower,
+				this.overlayWild,
+				this.overlayShips,
+				this.overlayRobots,
+				this.overlayFog,
+				this.overlayFoundObjects,
+				this.overlayView
             };
         }
 
@@ -111,7 +114,7 @@ namespace BetterMiniMap
                 new FloatMenuCheckBox(this.overlayTerrain, "BMM_TerrainOverlayLabel".Translate()),
                 new FloatMenuCheckBox(this.overlayShips, "BMM_ShipsOverlayLabel".Translate()),
                 new FloatMenuCheckBox(this.overlayRobots, "BMM_RobotsOverlayLabel".Translate())
-            };
+			};
         }
 
         public override void Notify_ResolutionChanged()

@@ -70,16 +70,13 @@ namespace BetterMiniMap.Overlays
         // NOTE: there maybe a better place to put this...
         protected void ExposeData(string overlayName) => Scribe_Values.Look<bool>(ref this.visible, overlayName, true);
 
-        public virtual bool ShouldUpdateOverlay
-        {
-            get
-            {
-                if (!Visible)
-                    return false;
-                // TODO looks like hashticking... (is this best?)
-                return (Time.frameCount + this.GetHashCode()) % this.GetUpdateInterval() == 0;
-            }
-        }
+		public virtual bool GetShouldUpdateOverlay()
+		{
+			if (!Visible)
+				return false;
+			// TODO looks like hashticking... (is this best?)
+			return (Time.frameCount + this.GetHashCode()) % this.GetUpdateInterval() == 0;
+		}
 
-    }
+	}
 }

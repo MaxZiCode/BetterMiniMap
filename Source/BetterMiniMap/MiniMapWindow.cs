@@ -320,10 +320,10 @@ namespace BetterMiniMap
         public void Update()
         {
             foreach (Overlay current in this.overlays)
-                if (current.ShouldUpdateOverlay)
+                if (current.GetShouldUpdateOverlay())
                     current.Update();
 
-            if (this.OverlayArea.ShouldUpdateOverlay)
+            if (this.OverlayArea.GetShouldUpdateOverlay())
                 this.OverlayArea.Update();
         }
 

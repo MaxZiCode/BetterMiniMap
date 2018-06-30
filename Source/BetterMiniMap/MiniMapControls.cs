@@ -16,7 +16,7 @@ namespace BetterMiniMap
         private Rect dragButtonRect;
         private Rect homeButtonRect;
         private Rect resizeButtonRect;
-		private Rect thingsButtonRect;
+		private Rect FindButtonRect;
 
         private MiniMapWindow miniMap;
 
@@ -33,7 +33,7 @@ namespace BetterMiniMap
             this.layer = WindowLayer.GameUI;
 
             float xPos = buttonMargin;
-			this.thingsButtonRect = new Rect(buttonMargin, buttonMargin, buttonWidth, buttonWidth);
+			this.FindButtonRect = new Rect(buttonMargin, buttonMargin, buttonWidth, buttonWidth);
 			this.homeButtonRect = new Rect(0, buttonMargin, buttonWidth, buttonWidth);
             this.configButtonRect = new Rect(0 , buttonMargin, buttonWidth, buttonWidth);
             this.resizeButtonRect = new Rect(0, buttonMargin, buttonWidth, buttonWidth);
@@ -126,9 +126,9 @@ namespace BetterMiniMap
                 }
             }
 
-			Widgets.DrawHighlightIfMouseover(this.thingsButtonRect); //TODO: will change
-			TooltipHandler.TipRegion(this.thingsButtonRect, "Найс рофел");
-			if (Widgets.ButtonImage(this.thingsButtonRect, null))
+			Widgets.DrawHighlightIfMouseover(this.FindButtonRect); //TODO: will change
+			TooltipHandler.TipRegion(this.FindButtonRect, "Найс рофел");
+			if (Widgets.ButtonImage(this.FindButtonRect, null))
 			{
 				if (Event.current.button == 0 || Event.current.button == 1) // left/right click
 					SelectWindow.DrawWindow();

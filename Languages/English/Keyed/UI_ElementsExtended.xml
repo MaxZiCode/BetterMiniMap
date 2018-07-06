@@ -11,6 +11,7 @@
 	<BMME_FindButtonLabel>Find</BMME_FindButtonLabel>
 	
 	<BMME_BuildingCategoryLabel>Buildings</BMME_BuildingCategoryLabel>
+	<BMME_TerrainCategoryLabel>Terrains</BMME_TerrainCategoryLabel>
 	<BMME_PlantCategoryLabel>Plants</BMME_PlantCategoryLabel>
 	<BMME_PawndsCategoryLabel>Pawns</BMME_PawndsCategoryLabel>
 	<BMME_OtherCategoryLabel>Other</BMME_OtherCategoryLabel>

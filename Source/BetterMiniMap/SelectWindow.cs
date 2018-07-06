@@ -57,10 +57,11 @@ namespace BetterMiniMap
 			{
 				Find.WindowStack.Add(new FloatMenu(new List<FloatMenuOption>()
 				{
-					new FloatMenuOption("BMME_BuildingCategoryLabel".Translate(), delegate{ SWD.SelectedCategory = typeof(Building).Name; }),
-					new FloatMenuOption("BMME_PlantCategoryLabel".Translate(), delegate{ SWD.SelectedCategory = typeof(Plant).Name; }),
-					new FloatMenuOption("BMME_PawndsCategoryLabel".Translate(), delegate{ SWD.SelectedCategory = typeof(Pawn).Name; }),
-					new FloatMenuOption("BMME_OtherCategoryLabel".Translate(), delegate{ SWD.SelectedCategory = typeof(Thing).Name; })
+					new FloatMenuOption("BMME_BuildingCategoryLabel".Translate(), delegate{ SWD.SelectedCategory = "BMME_BuildingCategoryLabel".Translate(); }),
+					new FloatMenuOption("BMME_TerrainCategoryLabel".Translate(), delegate{ SWD.SelectedCategory = "BMME_TerrainCategoryLabel".Translate(); }),
+					new FloatMenuOption("BMME_PlantCategoryLabel".Translate(), delegate{ SWD.SelectedCategory = "BMME_PlantCategoryLabel".Translate(); }),
+					new FloatMenuOption("BMME_PawndsCategoryLabel".Translate(), delegate{ SWD.SelectedCategory = "BMME_PawndsCategoryLabel".Translate(); }),
+					new FloatMenuOption("BMME_OtherCategoryLabel".Translate(), delegate{ SWD.SelectedCategory = "BMME_OtherCategoryLabel".Translate(); })
 				}));
 			}
 
@@ -124,7 +125,7 @@ namespace BetterMiniMap
 			AllLocations = new Dictionary<string, List<IntVec3>>{ { String.Empty, new List<IntVec3>() } };
 			ObjectsCategories = new Dictionary<string, List<string>>();
 			ThingToRender = string.Empty;
-			SelectedCategory = typeof(Building).Name;
+			SelectedCategory = "BMME_BuildingCategoryLabel".Translate();
 			CurrentMap = Find.VisibleMap;
 		}
 
@@ -157,15 +158,15 @@ namespace BetterMiniMap
 			{
 				if (CurrentMap.fogGrid.IsFogged(location))
 					continue;
-				FillData<TerrainDef>(location, location.GetTerrain(CurrentMap).label);
-				List<Thing> allThingsOnLocation = location.GetThingList(CurrentMap);
+				FillData<TerrainDef>(location, location.GetTerrain(CurrentMap).label, "BMME_TerrainCategoryLabel".Translate());
+				List <Thing> allThingsOnLocation = location.GetThingList(CurrentMap);
 				if (allThingsOnLocation.Count > 0)
 				{
 					foreach (Thing currentThing in allThingsOnLocation)
 					{
-						if (FillData<Plant>(location, currentThing.def.label, currentThing))
+						if (FillData<Plant>(location, currentThing.def.label, "BMME_PlantCategoryLabel".Translate(), currentThing))
 							continue;
-						if (FillData<Pawn>(location, currentThing.def.label, currentThing))
+						if (FillData<Pawn>(location, currentThing.def.label, "BMME_PawndsCategoryLabel".Translate(), currentThing))
 							continue;
 
 						string label;
@@ -174,9 +175,9 @@ namespace BetterMiniMap
 						else
 							label = currentThing.def.label;
 
-						if (FillData<Building>(location, label, currentThing))
+						if (FillData<Building>(location, label, "BMME_BuildingCategoryLabel".Translate(), currentThing))
 							continue;
-						FillData<Thing>(location, currentThing.def.label, currentThing);
+						FillData<Thing>(location, currentThing.def.label, "BMME_OtherCategoryLabel".Translate(), currentThing);
 					}
 				}
 			}
@@ -184,11 +185,10 @@ namespace BetterMiniMap
 		}
 
 
-		private bool FillData<T>(IntVec3 location, string label, Thing currentThing = null)
+		private bool FillData<T>(IntVec3 location, string label, string categoryName, Thing currentThing = null)
 		{
 			if (currentThing is T || currentThing == null)
 			{
-				string categoryName = typeof(T).Name;
 				if (ObjectsCategories.ContainsKey(categoryName))
 				{
 					if (!ObjectsCategories[categoryName].Contains(label))

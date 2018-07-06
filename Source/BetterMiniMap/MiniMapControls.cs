@@ -16,6 +16,7 @@ namespace BetterMiniMap
         private Rect dragButtonRect;
         private Rect homeButtonRect;
         private Rect resizeButtonRect;
+		private Rect FindButtonRect;
 
         private MiniMapWindow miniMap;
 
@@ -32,13 +33,15 @@ namespace BetterMiniMap
             this.layer = WindowLayer.GameUI;
 
             float xPos = buttonMargin;
-            this.homeButtonRect = new Rect(buttonMargin, buttonMargin, buttonWidth, buttonWidth);
+			this.FindButtonRect = new Rect(buttonMargin, buttonMargin, buttonWidth, buttonWidth);
+			this.homeButtonRect = new Rect(0, buttonMargin, buttonWidth, buttonWidth);
             this.configButtonRect = new Rect(0 , buttonMargin, buttonWidth, buttonWidth);
             this.resizeButtonRect = new Rect(0, buttonMargin, buttonWidth, buttonWidth);
             this.dragButtonRect = new Rect(0, buttonMargin, buttonWidth, buttonWidth);
 
             float xDiff = buttonWidth + 2f * buttonMargin;
 
+			this.homeButtonRect.x = xPos += xDiff;
             this.configButtonRect.x = xPos += xDiff;
             this.resizeButtonRect.x = xPos += xDiff;
             this.dragButtonRect.x = xPos += xDiff;
@@ -122,7 +125,15 @@ namespace BetterMiniMap
                     miniMap.resizing = false;
                 }
             }
-        }
+
+			Widgets.DrawHighlightIfMouseover(this.FindButtonRect); //TODO: will change
+			TooltipHandler.TipRegion(this.FindButtonRect, "BMME_FindButtonTooltip".Translate());
+			if (Widgets.ButtonImage(this.FindButtonRect, MiniMapTextures.find))
+			{
+				if (Event.current.button == 0 || Event.current.button == 1) // left/right click
+					SelectWindow.DrawWindow();
+			}
+		}
 
         private FloatMenu GetAreaOptions()
         {

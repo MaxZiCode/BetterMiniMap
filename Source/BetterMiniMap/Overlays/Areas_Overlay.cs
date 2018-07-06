@@ -23,9 +23,9 @@ namespace BetterMiniMap.Overlays
 
 		public override int GetUpdateInterval() => BetterMiniMapMod.settings.updatePeriods.areas;
 
-        public override bool ShouldUpdateOverlay
-        {
-            get => area != null && base.ShouldUpdateOverlay;
-        }
-    }
+		public override bool GetShouldUpdateOverlay()
+		{
+			return area != null && base.GetShouldUpdateOverlay();
+		}
+	}
 }

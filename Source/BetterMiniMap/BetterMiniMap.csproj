@@ -41,7 +41,7 @@
       <HintPath>..\..\..\SettingsHelper\Assemblies\1SettingsHelper.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>C:\Users\Maxim\Desktop\RimWorld Modding\Assemblies\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -51,13 +51,14 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>C:\Users\Maxim\Desktop\RimWorld Modding\Assemblies\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FloatMenuCheckBox.cs" />
     <Compile Include="FloatMenuRadioButton.cs" />
+    <Compile Include="FoundObjects_Overlay.cs" />
     <Compile Include="GameComponent.cs" />
     <Compile Include="MiniMapControls.cs" />
     <Compile Include="MiniMapTextures.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Overlays\Pawns_Overlay.cs" />
     <Compile Include="Overlays\PowerGrid_Overlay.cs" />
     <Compile Include="Overlays\Robots_Overlay.cs" />
+    <Compile Include="SelectWindow.cs" />
     <Compile Include="Overlays\Ships_Overlay.cs" />
     <Compile Include="Overlays\Terrain_Overlay.cs" />
     <Compile Include="Overlays\Things_Overlay.cs" />
@@ -84,9 +86,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /S /Y "$(TargetDir)*" "C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\$(ProjectName)\Assemblies\"
-xcopy /S /Y "$(SolutionDir)..\About\*" "C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\$(ProjectName)\About\"
-xcopy /S /Y "$(SolutionDir)..\Textures\*" "C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\$(ProjectName)\Textures\"
-xcopy /S /Y "$(SolutionDir)..\Languages\*" "C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\$(ProjectName)\Languages\"</PostBuildEvent>
+    <PostBuildEvent>@echo off
+SET "ProjectName=BetterMiniMap"
+SET "SolutionDir=F:\GitHub Repos\Rimworld\%25ProjectName%25\Source"
+@echo on
+
+xcopy /S /Y "%25SolutionDir%25\..\Assemblies\*" "F:\Steam\SteamApps\common\RimWorld\Mods\%25ProjectName%25\Assemblies\"
+xcopy /S /Y "%25SolutionDir%25\..\About\*" "F:\Steam\SteamApps\common\RimWorld\Mods\%25ProjectName%25\About\"
+xcopy /S /Y "%25SolutionDir%25\..\Textures\*" "F:\Steam\SteamApps\common\RimWorld\Mods\%25ProjectName%25\Textures\"
+xcopy /S /Y "%25SolutionDir%25\..\Languages\*" "F:\Steam\SteamApps\common\RimWorld\Mods\%25ProjectName%25\Languages\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

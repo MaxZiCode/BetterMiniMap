@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<BMME_FindButtonTooltip>Поиск объектов. Содержит инструменты для поиска объектов на миникарте.</BMME_FindButtonTooltip>
+	
+	<BMME_ObjectsSeekerLabel>Поиск объектов</BMME_ObjectsSeekerLabel>
+	<BMME_UpdateButtonLabel>Обновить</BMME_UpdateButtonLabel>
+	<BMME_ClearButtonLabel>Очистить</BMME_ClearButtonLabel>
+	<BMME_NameLabel>Имя</BMME_NameLabel>
+	<BMME_CellsCountLabel>Кол-во клеток</BMME_CellsCountLabel>
+	<BMME_FindButtonLabel>Найти</BMME_FindButtonLabel>
+	
+	<BMME_BuildingCategoryLabel>Постройки</BMME_BuildingCategoryLabel>
+	<BMME_TerrainCategoryLabel>Покрытия</BMME_TerrainCategoryLabel>
+	<BMME_PlantCategoryLabel>Растения</BMME_PlantCategoryLabel>
+	<BMME_PawndsCategoryLabel>Существа</BMME_PawndsCategoryLabel>
+	<BMME_OtherCategoryLabel>Другое</BMME_OtherCategoryLabel>
+
+</LanguageData>

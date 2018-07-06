@@ -34,6 +34,14 @@
     <BMM_HostileAnimalIndicatorSizeLabel>Враждебные животные</BMM_HostileAnimalIndicatorSizeLabel>
     <BMM_HuntingIndicatorSizeLabel>Животные для охоты</BMM_HuntingIndicatorSizeLabel>
 
+	 <BMM_ColorPickersLabel>Выбор цвета</BMM_ColorPickersLabel>
+
+    <BMM_PlanningLabel>Планирование</BMM_PlanningLabel>
+    <BMM_PoweredOnLabel>Питаются от сети</BMM_PoweredOnLabel>
+    <BMM_PoweredByBatteriesLabel>Батареи подключены</BMM_PoweredByBatteriesLabel>
+    <BMM_NotPoweredLabel>Батареи отключены</BMM_NotPoweredLabel>
+    <BMM_PoweredOffLabel>Не питаются от сети</BMM_PoweredOffLabel>
+	
     <BMM_HomeButtonTooltip>Меню для выбора отображаемой зоны. Нельзя выбрать несколько зон одновременно.</BMM_HomeButtonTooltip>
     <BMM_ConfigButtonTooltip>Выбор оверлеев, отображаемых на мини-карте в данный момент.</BMM_ConfigButtonTooltip>
     <BMM_ResizeButtonTooltip>Позволяет изменить размер мини-карты. После включения нажмите на карту и перетаскивайте влево или вправо для изменения размера.</BMM_ResizeButtonTooltip>

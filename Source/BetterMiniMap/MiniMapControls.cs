@@ -128,7 +128,7 @@ namespace BetterMiniMap
 
 			Widgets.DrawHighlightIfMouseover(this.FindButtonRect); //TODO: will change
 			TooltipHandler.TipRegion(this.FindButtonRect, "BMME_FindButtonTooltip".Translate());
-			if (Widgets.ButtonImage(this.FindButtonRect, null))
+			if (Widgets.ButtonImage(this.FindButtonRect, MiniMapTextures.find))
 			{
 				if (Event.current.button == 0 || Event.current.button == 1) // left/right click
 					SelectWindow.DrawWindow();

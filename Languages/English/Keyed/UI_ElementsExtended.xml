@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
-	<BMME_FindButtonTooltip>Objects seeker. Contains tools for finding objects on the map.</BMME_FindButtonTooltip>
+	<BMME_FindButtonTooltip>Objects seeker. Contains tools for finding objects on the minimap.</BMME_FindButtonTooltip>
 	
 	<BMME_ObjectsSeekerLabel>Objects seeker</BMME_ObjectsSeekerLabel>
 	<BMME_UpdateButtonLabel>Update</BMME_UpdateButtonLabel>

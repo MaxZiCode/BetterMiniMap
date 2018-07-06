@@ -127,7 +127,7 @@ namespace BetterMiniMap
             }
 
 			Widgets.DrawHighlightIfMouseover(this.FindButtonRect); //TODO: will change
-			TooltipHandler.TipRegion(this.FindButtonRect, "Найс рофел");
+			TooltipHandler.TipRegion(this.FindButtonRect, "BMME_FindButtonTooltip".Translate());
 			if (Widgets.ButtonImage(this.FindButtonRect, null))
 			{
 				if (Event.current.button == 0 || Event.current.button == 1) // left/right click

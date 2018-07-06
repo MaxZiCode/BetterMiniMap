@@ -41,16 +41,15 @@ namespace BetterMiniMap
 			Rect categoryButtonRect = clearButtonRect;
 			categoryButtonRect.x = clearButtonRect.xMax;
 			
-			Widgets.Label(titleRect, "Objects seeker");
+			Widgets.Label(titleRect, "BMME_ObjectsSeekerLabel".Translate());
 			Text.Font = GameFont.Small;
 
-			if (Widgets.ButtonText(updateButtonRect, "Update"))
+			if (Widgets.ButtonText(updateButtonRect, "BMME_UpdateButtonLabel".Translate()))
 			{
 				SWD.FindAllThings();
 			}
-			if (Widgets.ButtonText(clearButtonRect, "Clear"))
+			if (Widgets.ButtonText(clearButtonRect, "BMME_ClearButtonLabel".Translate()))
 			{
-				SWD.Positions.Clear();
 				SWD.ThingToRender = string.Empty;
 				FoundObjects_Overlay.HasUpdated = false;
 			}
@@ -58,10 +57,10 @@ namespace BetterMiniMap
 			{
 				Find.WindowStack.Add(new FloatMenu(new List<FloatMenuOption>()
 				{
-					new FloatMenuOption(typeof(Building).Name, delegate{ SWD.SelectedCategory = typeof(Building).Name; }),
-					new FloatMenuOption(typeof(Plant).Name, delegate{ SWD.SelectedCategory = typeof(Plant).Name; }),
-					new FloatMenuOption(typeof(Pawn).Name, delegate{ SWD.SelectedCategory = typeof(Pawn).Name; }),
-					new FloatMenuOption(typeof(Thing).Name, delegate{ SWD.SelectedCategory = typeof(Thing).Name; })
+					new FloatMenuOption("BMME_BuildingCategoryLabel".Translate(), delegate{ SWD.SelectedCategory = typeof(Building).Name; }),
+					new FloatMenuOption("BMME_PlantCategoryLabel".Translate(), delegate{ SWD.SelectedCategory = typeof(Plant).Name; }),
+					new FloatMenuOption("BMME_PawndsCategoryLabel".Translate(), delegate{ SWD.SelectedCategory = typeof(Pawn).Name; }),
+					new FloatMenuOption("BMME_OtherCategoryLabel".Translate(), delegate{ SWD.SelectedCategory = typeof(Thing).Name; })
 				}));
 			}
 
@@ -71,7 +70,7 @@ namespace BetterMiniMap
 			Widgets.BeginScrollView(mainRect, ref ScrollPosition, rect1, true);
 			GUI.BeginGroup(rect1);
 			float curY = 0; ;
-			curY += this.GroupOfThingsMaker(rect1.x, curY, rect1.width, "Label", "Cells count", false);
+			curY += this.GroupOfThingsMaker(rect1.x, curY, rect1.width, "BMME_NameLabel".Translate(), "BMME_CellsCountLabel".Translate(), false);
 			SWD.ObjectsCategories[SWD.SelectedCategory].Sort();
 			foreach (string currentValue in SWD.ObjectsCategories[SWD.SelectedCategory])
 			{
@@ -87,7 +86,7 @@ namespace BetterMiniMap
 
 		float GroupOfThingsMaker(float x, float y, float width, string label, string countOfCells, bool createFindButton = true)
 		{
-			float findButtonWidth = Text.CalcSize("Find").x + 8f;
+			float findButtonWidth = Text.CalcSize("BMME_FindButtonLabel".Translate()).x + 8f;
 
 			Rect rectLabel = new Rect(x, y, width - findButtonWidth, Text.LineHeight);
 			Widgets.DrawHighlightIfMouseover(rectLabel);
@@ -106,7 +105,7 @@ namespace BetterMiniMap
 				Rect findButtonRect = rectCount;
 				findButtonRect.x = rectCount.xMax;
 				findButtonRect.width = findButtonWidth;
-				if (Widgets.ButtonText(findButtonRect, "Find"))
+				if (Widgets.ButtonText(findButtonRect, "BMME_FindButtonLabel".Translate()))
 				{
 					SWD.ThingToRender = label;
 					FoundObjects_Overlay.HasUpdated = false;
@@ -122,7 +121,7 @@ namespace BetterMiniMap
 	{
 		public SelectWindowData()
 		{
-			AllLocations = new Dictionary<string, List<IntVec3>>();
+			AllLocations = new Dictionary<string, List<IntVec3>>{ { String.Empty, new List<IntVec3>() } };
 			ObjectsCategories = new Dictionary<string, List<string>>();
 			ThingToRender = string.Empty;
 			SelectedCategory = typeof(Building).Name;
@@ -133,7 +132,7 @@ namespace BetterMiniMap
 		{
 			get
 			{
-				if (CurrentMap == Find.VisibleMap && !ThingToRender.NullOrEmpty() && AllLocations.ContainsKey(ThingToRender))
+				if (CurrentMap == Find.VisibleMap && AllLocations.ContainsKey(ThingToRender))
 					return AllLocations[ThingToRender];
 				else
 					return null;
@@ -152,6 +151,7 @@ namespace BetterMiniMap
 			
 			AllLocations.Clear();
 			ObjectsCategories.Clear();
+			AllLocations.Add(String.Empty, new List<IntVec3>());
 
 			foreach (IntVec3 location in cellsLocations)
 			{
@@ -182,6 +182,7 @@ namespace BetterMiniMap
 			}
 			FoundObjects_Overlay.HasUpdated = false;
 		}
+
 
 		private bool FillData<T>(IntVec3 location, string label, Thing currentThing = null)
 		{

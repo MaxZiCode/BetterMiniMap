@@ -36,7 +36,7 @@
 
 	 <BMM_ColorPickersLabel>Выбор цвета</BMM_ColorPickersLabel>
 
-    <BMM_PlanningLabel>Разметка</BMM_PlanningLabel>
+    <BMM_PlanningLabel>Планирование</BMM_PlanningLabel>
     <BMM_PoweredOnLabel>Вещи подключены</BMM_PoweredOnLabel>
     <BMM_PoweredByBatteriesLabel>Батареи подключены</BMM_PoweredByBatteriesLabel>
     <BMM_NotPoweredLabel>Батареи отключены</BMM_NotPoweredLabel>

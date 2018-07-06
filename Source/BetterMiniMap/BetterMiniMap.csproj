@@ -91,6 +91,9 @@ SET "ProjectName=BetterMiniMap"
 SET "SolutionDir=F:\GitHub Repos\Rimworld\%25ProjectName%25\Source"
 @echo on
 
-xcopy /S /Y "%25SolutionDir%25\..\Assemblies\*" "F:\Steam\SteamApps\common\RimWorld\Mods\%25ProjectName%25\Assemblies\"</PostBuildEvent>
+xcopy /S /Y "%25SolutionDir%25\..\Assemblies\*" "F:\Steam\SteamApps\common\RimWorld\Mods\%25ProjectName%25\Assemblies\"
+xcopy /S /Y "%25SolutionDir%25\..\About\*" "F:\Steam\SteamApps\common\RimWorld\Mods\%25ProjectName%25\About\"
+xcopy /S /Y "%25SolutionDir%25\..\Textures\*" "F:\Steam\SteamApps\common\RimWorld\Mods\%25ProjectName%25\Textures\"
+xcopy /S /Y "%25SolutionDir%25\..\Languages\*" "F:\Steam\SteamApps\common\RimWorld\Mods\%25ProjectName%25\Languages\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

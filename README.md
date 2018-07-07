@@ -1,5 +1,5 @@
 # BetterMiniMap Extended [![RimWorld Alpha 18](https://img.shields.io/badge/RimWorld-Alpha%2018-brightgreen.svg)](http://rimworldgame.com/)
-Original mod: [BetterMiniMap](https://github.com/KiameV/rimworld-recolorzones).
+Original mod: [BetterMiniMap](https://github.com/AaronCRobinson/BetterMiniMap).
 
 This mod contains the original minimap and new features.
 

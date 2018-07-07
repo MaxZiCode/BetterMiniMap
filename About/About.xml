@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-  <name>BetterMiniMap</name>
-  <author>Why_is_that</author>
-  <description>It is better.</description>
+  <name>BetterMiniMap Extended</name>
+  <author>MaxZiCode and Aaron C Robinson</author>
+  <url>https://github.com/MaxZiCode/BetterMiniMapExtended</url>
+  <description>This mod contains the original minimap and new features.</description>
   <targetVersion>0.18.0</targetVersion>
 </ModMetaData>

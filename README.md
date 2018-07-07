@@ -8,7 +8,7 @@ This mod contains the original minimap and new features.
 Do not use BetterMiniMap and BetterMiniMap Extended together!
 
 ## New features
-- Objects seeker tool. Allows to display any objects on the minimap and quickly find them.
+- Objects seeker tool. Allows to display any objects on the minimap and find them quickly.
 
 ## Translations
 

@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BetterMiniMap</RootNamespace>
-    <AssemblyName>BetterMiniMap</AssemblyName>
+    <AssemblyName>BetterMiniMapExtended</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -87,8 +87,8 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>@echo off
-SET "ProjectName=BetterMiniMap"
-SET "SolutionDir=F:\GitHub Repos\Rimworld\%25ProjectName%25\Source"
+SET "ProjectName=BetterMiniMapExtended"
+SET "SolutionDir=F:\GitHub Repos\Rimworld\BetterMiniMap\Source"
 @echo on
 
 xcopy /S /Y "%25SolutionDir%25\..\Assemblies\*" "F:\Steam\SteamApps\common\RimWorld\Mods\%25ProjectName%25\Assemblies\"

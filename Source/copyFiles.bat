@@ -1,6 +1,6 @@
 @echo off
-SET "ProjectName=BetterMiniMap"
-SET "SolutionDir=F:\GitHub Repos\Rimworld\%ProjectName%\Source"
+SET "ProjectName=BetterMiniMapExtended"
+SET "SolutionDir=F:\GitHub Repos\Rimworld\BetterMiniMap\Source"
 @echo on
 
 xcopy /S /Y "%SolutionDir%\..\About\*" "F:\Steam\SteamApps\common\RimWorld\Mods\%ProjectName%\About\"

@@ -126,7 +126,7 @@ namespace BetterMiniMap
                 }
             }
 
-			Widgets.DrawHighlightIfMouseover(this.FindButtonRect); //TODO: will change
+			Widgets.DrawHighlightIfMouseover(this.FindButtonRect);
 			TooltipHandler.TipRegion(this.FindButtonRect, "BMME_FindButtonTooltip".Translate());
 			if (Widgets.ButtonImage(this.FindButtonRect, MiniMapTextures.find))
 			{

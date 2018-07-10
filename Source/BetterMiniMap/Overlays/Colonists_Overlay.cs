@@ -31,6 +31,5 @@ namespace BetterMiniMap.Overlays
                 radius = BetterMiniMapMod.settings.indicatorSizes.colonists;
             }
         }
-
 	}
 }

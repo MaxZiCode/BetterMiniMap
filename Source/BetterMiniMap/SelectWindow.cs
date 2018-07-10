@@ -65,7 +65,7 @@ namespace BetterMiniMap
 				}));
 			}
 
-			Rect mainRect = new Rect(inRect){ yMin = updateButtonRect.yMax };
+			Rect mainRect = new Rect(inRect){ y = updateButtonRect.yMax };
 			Rect rect1 = new Rect(0.0f, 0.0f, mainRect.width - 16f, (SWD.ObjectsCategories[SWD.SelectedCategory].Count + 1) * Text.LineHeight);
 			
 			Widgets.BeginScrollView(mainRect, ref ScrollPosition, rect1, true);
@@ -75,7 +75,7 @@ namespace BetterMiniMap
 			SWD.ObjectsCategories[SWD.SelectedCategory].Sort();
 			foreach (string currentValue in SWD.ObjectsCategories[SWD.SelectedCategory])
 			{
-				curY += this.GroupOfThingsMaker(rect1.x, curY, rect1.width, currentValue, SWD.AllLocations[currentValue].Count.ToString());
+				curY += this.GroupOfThingsMaker(rect1.x, curY, rect1.width, currentValue, SWD.AllLocations[currentValue].Count.ToString(), true);
 			}
 			GUI.EndGroup();
 			Widgets.EndScrollView();
@@ -85,14 +85,24 @@ namespace BetterMiniMap
 
 		public static void DrawWindow() => Find.WindowStack.Add(new SelectWindow());
 
-		float GroupOfThingsMaker(float x, float y, float width, string label, string countOfCells, bool createFindButton = true)
+		float GroupOfThingsMaker(float x, float y, float width, string label, string countOfCells, bool createFindButton)
 		{
-			float findButtonWidth = Text.CalcSize("BMME_FindButtonLabel".Translate()).x + 8f;
+			Rect rectLabel = new Rect(x, y, width, Text.LineHeight);
+			
+			if (label == SWD.ThingToRender)
+				Widgets.DrawHighlightSelected(rectLabel);
+			else if(createFindButton)
+			{
+				if (Widgets.ButtonInvisible(rectLabel))
+				{
+					SWD.ThingToRender = label;
+					FoundObjects_Overlay.HasUpdated = false;
+				}
+				Widgets.DrawHighlightIfMouseover(rectLabel);
+			}
 
-			Rect rectLabel = new Rect(x, y, width - findButtonWidth, Text.LineHeight);
-			Widgets.DrawHighlightIfMouseover(rectLabel);
 			Rect rectCount = rectLabel;
-			rectCount.width = 80f;
+			rectCount.width = 100f;
 			rectLabel.xMax -= rectCount.width;
 			rectCount.x = rectLabel.xMax;
 
@@ -100,18 +110,6 @@ namespace BetterMiniMap
 			TooltipHandler.TipRegion(rectLabel, label.ToString());
 			Widgets.Label(rectCount.LeftPartPixels(rectCount.width), countOfCells);
 			TooltipHandler.TipRegion(rectCount, countOfCells);
-
-			if (createFindButton)
-			{
-				Rect findButtonRect = rectCount;
-				findButtonRect.x = rectCount.xMax;
-				findButtonRect.width = findButtonWidth;
-				if (Widgets.ButtonText(findButtonRect, "BMME_FindButtonLabel".Translate()))
-				{
-					SWD.ThingToRender = label;
-					FoundObjects_Overlay.HasUpdated = false;
-				}
-			}
 			return rectLabel.height;
 		}
 	}

@@ -58,7 +58,7 @@
   <ItemGroup>
     <Compile Include="FloatMenuCheckBox.cs" />
     <Compile Include="FloatMenuRadioButton.cs" />
-    <Compile Include="FoundObjects_Overlay.cs" />
+    <Compile Include="Overlays\FoundObjects_Overlay.cs" />
     <Compile Include="GameComponent.cs" />
     <Compile Include="MiniMapControls.cs" />
     <Compile Include="MiniMapTextures.cs" />

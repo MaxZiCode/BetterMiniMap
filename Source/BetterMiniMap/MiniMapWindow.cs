@@ -98,11 +98,7 @@ namespace BetterMiniMap
 				this.overlayFog,
 				this.overlayFoundObjects,
 				this.overlayView
-<<<<<<< HEAD
             };
-=======
-			};
->>>>>>> master
         }
 
         public List<FloatMenuOption> GenerateOverlayMenuItems()
@@ -326,13 +322,7 @@ namespace BetterMiniMap
             foreach (Overlay current in this.overlays)
                 if (current.GetShouldUpdateOverlay())
                     current.Update();
-<<<<<<< HEAD
-
-            if (this.OverlayArea.GetShouldUpdateOverlay())
-=======
-			
 			if (this.OverlayArea.GetShouldUpdateOverlay())
->>>>>>> master
                 this.OverlayArea.Update();
         }
 

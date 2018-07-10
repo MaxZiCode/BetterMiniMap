@@ -98,7 +98,11 @@ namespace BetterMiniMap
 				this.overlayFog,
 				this.overlayFoundObjects,
 				this.overlayView
+<<<<<<< HEAD
             };
+=======
+			};
+>>>>>>> master
         }
 
         public List<FloatMenuOption> GenerateOverlayMenuItems()
@@ -135,21 +139,21 @@ namespace BetterMiniMap
                 for (int i = 0; i < this.overlays.Count; i++)
                     this.overlays[i].GenerateTexture();
 
-                if (selectedAreaLabel != "")
-                {
-                    List<Area> allAreas = Find.VisibleMap.areaManager.AllAreas;
-                    for (int i = 0; i < allAreas.Count; i++)
-                    {
-                        if (allAreas[i].Label == selectedAreaLabel)
-                        {
-                            this.overlayArea.area = allAreas[i];
-                            break;
-                        }
-                    }
-                    selectedAreaLabel = "";
-                }
+				if (selectedAreaLabel != "")
+				{
+					List<Area> allAreas = Find.VisibleMap.areaManager.AllAreas;
+					for (int i = 0; i < allAreas.Count; i++)
+					{
+						if (allAreas[i].Label == selectedAreaLabel)
+						{
+							this.overlayArea.area = allAreas[i];
+							break;
+						}
+					}
+					selectedAreaLabel = "";
+				}
 
-                this.Refresh();
+				this.Refresh();
             }
 
             this.Update();
@@ -161,7 +165,7 @@ namespace BetterMiniMap
 			if (this.OverlayArea.area != null)
 				GUI.DrawTextureWithTexCoords(inRect, this.OverlayArea.Texture, this.coords);
 
-            if (Mouse.IsOver(inRect))
+			if (Mouse.IsOver(inRect))
             {
                 this.preventCameraMotion = true;
                 if (this.resizing)
@@ -322,8 +326,13 @@ namespace BetterMiniMap
             foreach (Overlay current in this.overlays)
                 if (current.GetShouldUpdateOverlay())
                     current.Update();
+<<<<<<< HEAD
 
             if (this.OverlayArea.GetShouldUpdateOverlay())
+=======
+			
+			if (this.OverlayArea.GetShouldUpdateOverlay())
+>>>>>>> master
                 this.OverlayArea.Update();
         }
 
@@ -331,8 +340,8 @@ namespace BetterMiniMap
         {
             foreach (Overlay current in this.overlays)
                 current.Update();
-
-            if (this.OverlayArea.area != null)
+			
+			if (this.OverlayArea.area != null)
                 this.OverlayArea.Update();
         }
 

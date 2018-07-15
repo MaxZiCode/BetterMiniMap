@@ -313,11 +313,11 @@ namespace BetterMiniMap
                 settings.overlayColors.wildlifeTaming = scw.SelectedColor;
                 settings.overlayColors.wildlifeTamingFaded = BetterMiniMapSettings.FadedColor(scw.SelectedColor);
             });
-            listing_Standard.AddColorPickerButton("BMM_HostileAnimalIndicatorSizeLabel".Translate(), settings.overlayColors.wildlifeHunting, (SelectionColorWidget scw) => {
+            listing_Standard.AddColorPickerButton("BMM_HuntingIndicatorSizeLabel".Translate(), settings.overlayColors.wildlifeHunting, (SelectionColorWidget scw) => {
                 settings.overlayColors.wildlifeHunting = scw.SelectedColor;
                 settings.overlayColors.wildlifeHuntingFaded = BetterMiniMapSettings.FadedColor(scw.SelectedColor);
             });
-            listing_Standard.AddColorPickerButton("BMM_HuntingIndicatorSizeLabel".Translate(), settings.overlayColors.wildlifeHostiles, (SelectionColorWidget scw) => {
+            listing_Standard.AddColorPickerButton("BMM_HostileAnimalIndicatorSizeLabel".Translate(), settings.overlayColors.wildlifeHostiles, (SelectionColorWidget scw) => {
                 settings.overlayColors.wildlifeHostiles = scw.SelectedColor;
                 settings.overlayColors.wildlifeHostilesFaded = BetterMiniMapSettings.FadedColor(scw.SelectedColor);
             });

@@ -13,7 +13,7 @@
 	<BMME_BuildingCategoryLabel>Постройки</BMME_BuildingCategoryLabel>
 	<BMME_TerrainCategoryLabel>Покрытия</BMME_TerrainCategoryLabel>
 	<BMME_PlantCategoryLabel>Растения</BMME_PlantCategoryLabel>
-	<BMME_PawndsCategoryLabel>Существа</BMME_PawndsCategoryLabel>
+	<BMME_PawnsCategoryLabel>Существа</BMME_PawnsCategoryLabel>
 	<BMME_OtherCategoryLabel>Другое</BMME_OtherCategoryLabel>
 
 </LanguageData>

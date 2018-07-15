@@ -11,11 +11,11 @@ namespace BetterMiniMap.Overlays
 	public class FoundObjects_Overlay : MarkerOverlay
 	{
 		public static bool HasUpdated = false;
-		static SelectWindowData s_sWD = new SelectWindowData();
+		static SelectWindowData _sWD = new SelectWindowData();
 
 		public FoundObjects_Overlay(bool visible = true) : base(visible) { }
 
-		public static SelectWindowData SWD { get => s_sWD;}
+		public static SelectWindowData SWD { get => _sWD;}
 
 		public override int GetUpdateInterval() => 10;
 

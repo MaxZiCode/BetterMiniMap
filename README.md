@@ -27,6 +27,14 @@ Tools:
 - English
 - Russian
 
+## Acknowledgements
+- What_Is_That for the original mod
+- Common Core Library for the initial overlays
+- Brrainz and DoctorVanGogh for help reworking terrain overlay.
+- Xen for helping with terrain color selection (deprecated feature).
+- KiameV for [ColorPicker](https://github.com/KiameV/rimworld-recolorzones).
+- Pardeike/Brrainz for amazing non-destructive patching library, Harmony.
+
 <p align="center">
   <a href="https://github.com/pardeike/Harmony">
     <img src="https://s24.postimg.org/58bl1rz39/logo.png" alt="Harmony" />
@@ -40,11 +48,3 @@ Tools:
     <img src="https://img.shields.io/badge/license-MIT-lightgray.svg?style=flat" alt="MIT License" />
   </a>
 </p>
-
-## Acknowledgements
-- What_Is_That for the original mod
-- Common Core Library for the initial overlays
-- Brrainz and DoctorVanGogh for help reworking terrain overlay.
-- Xen for helping with terrain color selection (deprecated feature).
-- KiameV for [ColorPicker](https://github.com/KiameV/rimworld-recolorzones).
-- Pardeike/Brrainz for amazing non-destructive patching library, Harmony.

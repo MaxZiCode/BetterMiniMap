@@ -3,7 +3,7 @@ Original mod: [BetterMiniMap](https://github.com/AaronCRobinson/BetterMiniMap).
 
 This mod contains the original minimap and new features.
 
-Full Description on [Ludeon forum](https://ludeon.com/forums/index.php?topic=42337.0).
+Full description on [Ludeon forum](https://ludeon.com/forums/index.php?topic=42337.0).
 
 # WARNING
 

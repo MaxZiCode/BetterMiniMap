@@ -3,12 +3,14 @@ Original mod: [BetterMiniMap](https://github.com/AaronCRobinson/BetterMiniMap).
 
 This mod contains the original minimap and new features.
 
+Full Description on [Ludeon forum](https://ludeon.com/forums/index.php?topic=42337.0).
+
 # WARNING
 
 Do not use BetterMiniMap and BetterMiniMap Extended together!
 
 ## New features
-- Objects seeker tool. Allows to display any objects on the minimap and find them quickly.
+- Objects seeker tool. Allows to display any objects on the map and find them quickly.
 
 ## Translations
 

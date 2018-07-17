@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
   <name>BetterMiniMap Extended</name>
-  <author>MaxZiCode and Aaron C Robinson</author>
-  <url>https://github.com/MaxZiCode/BetterMiniMapExtended</url>
-  <description>This mod contains the original minimap and new features.</description>
+  <author>MaxZiCode, Aaron C Robinson and Why_Is_That</author>
+  <url>https://ludeon.com/forums/index.php?topic=42337.0</url>
+  <description>
+  v0.18.0.2
+  This mod contains the original minimap and new features.
+  </description>
   <targetVersion>0.18.0</targetVersion>
 </ModMetaData>

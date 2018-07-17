@@ -28,7 +28,7 @@ Tools:
 - Russian
 
 ## Acknowledgements
-- What_Is_That for the original mod
+- Why_is_that for the original mod
 - Common Core Library for the initial overlays
 - Brrainz and DoctorVanGogh for help reworking terrain overlay.
 - Xen for helping with terrain color selection (deprecated feature).

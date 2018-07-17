@@ -82,6 +82,7 @@
     <Compile Include="Overlays\Viewpoint_Overlay.cs" />
     <Compile Include="Overlays\Wildlife_Overlay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectWindowData.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

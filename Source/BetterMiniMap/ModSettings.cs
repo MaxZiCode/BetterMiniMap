@@ -41,38 +41,38 @@ namespace BetterMiniMap
             }
         }
 
-        public class IndicatorSizes : IExposable
-        {
-            public float colonists = 3f;
+        public class IndicatorSizes : IExposable // BMME changed
+		{
+            public float colonists = 4f;
             public float tamedAnimals = 2f;
-            public float enemyPawns = 2f;
-            public float traderPawns = 2f;
-            public float visitorPawns = 2f;
+            public float enemyPawns = 4f;
+            public float traderPawns = 3f;
+            public float visitorPawns = 3f;
             public float robots = 3f;
             public float ships = 3f;
-            public float wildlife = 1f;
-            public float wildlifeTaming = 2f;
-            public float wildlifeHunting = 2f;
-            public float wildlifeHostiles = 2f;
+            public float wildlife = 2f;
+            public float wildlifeTaming = 3f;
+            public float wildlifeHunting = 3f;
+            public float wildlifeHostiles = 3f;
 
             public void ExposeData()
             {
-                Scribe_Values.Look(ref this.colonists, "colonists", 3f);
+                Scribe_Values.Look(ref this.colonists, "colonists", 4f);
                 Scribe_Values.Look(ref this.tamedAnimals, "tamedAnimals", 2f);
-                Scribe_Values.Look(ref this.enemyPawns, "enemyPawns", 2f);
-                Scribe_Values.Look(ref this.traderPawns, "traderPawns", 2f);
-                Scribe_Values.Look(ref this.visitorPawns, "visitorPawns", 2f);
+                Scribe_Values.Look(ref this.enemyPawns, "enemyPawns", 4f);
+                Scribe_Values.Look(ref this.traderPawns, "traderPawns", 3f);
+                Scribe_Values.Look(ref this.visitorPawns, "visitorPawns", 3f);
                 Scribe_Values.Look(ref this.robots, "robots", 3f);
                 Scribe_Values.Look(ref this.ships, "ships", 3f);
-                Scribe_Values.Look(ref this.wildlife, "wildlife", 1f);
-                Scribe_Values.Look(ref this.wildlifeTaming, "wildlifeTaming", 1f);
-                Scribe_Values.Look(ref this.wildlifeHunting, "wildlifeHunting", 1f);
-                Scribe_Values.Look(ref this.wildlifeHostiles, "wildlifeHostiles", 1f);
+                Scribe_Values.Look(ref this.wildlife, "wildlife", 2f);
+                Scribe_Values.Look(ref this.wildlifeTaming, "wildlifeTaming", 3f);
+                Scribe_Values.Look(ref this.wildlifeHunting, "wildlifeHunting", 3f);
+                Scribe_Values.Look(ref this.wildlifeHostiles, "wildlifeHostiles", 3f);
             }
         }
 
-        public class OverlayColors : IExposable
-        {
+        public class OverlayColors : IExposable // BMME changed
+		{
             private static readonly Color miningColorDefault = new Color(0.75f, 0.4f, 0.125f, 1f);
             //private static readonly Color fadedBlack = new Color(0, 0, 0, 0.25f);
             private static readonly Color darkGray = new Color(0.65f, 0.65f, 0.65f, 1f);
@@ -81,17 +81,17 @@ namespace BetterMiniMap
             public Color fog = darkGray;
             public Color buildings = Color.white;
 
-            public Color colonists = Color.green;
-            public Color tamedAnimals = Color.green;
+            public Color colonists = new Color(0.020f, 0.996f, 0.043f, 1.000f);
+            public Color tamedAnimals = new Color(0.310f, 1.000f, 0.965f, 1.000f);
             public Color enemyPawns = Color.red;
             public Color traderPawns = Color.blue;
-            public Color visitorPawns = Color.green;
-            public Color robots = Color.white;
-            public Color ships = Color.red;
+            public Color visitorPawns = new Color(1.000f, 0.647f, 0.039f, 1.000f);
+            public Color robots = new Color(0.357f, 0.000f, 0.565f, 1.000f);
+            public Color ships = new Color(1.000f, 0.384f, 0.384f, 1.000f);
             public Color wildlife = Color.yellow;
-            public Color wildlifeTaming = Color.green;
-            public Color wildlifeHunting = Color.red;
-            public Color wildlifeHostiles = Color.red;
+            public Color wildlifeTaming = new Color(0.020f, 1.000f, 0.431f, 1.000f);
+            public Color wildlifeHunting = new Color(0.961f, 0.004f, 0.443f, 1.000f);
+            public Color wildlifeHostiles = new Color(0.588f, 0.004f, 0.000f, 1.000f);
 
             // used for edge colors
             public Color viewpointFaded;
@@ -107,9 +107,9 @@ namespace BetterMiniMap
             public Color wildlifeHuntingFaded;
             public Color wildlifeHostilesFaded;
 
-            public Color poweredOn = Color.yellow;
-            public Color poweredByBatteries = Color.green;
-            public Color notPowered = Color.red;
+            public Color poweredOn = new Color(0.937f, 1.000f, 0.616f, 1.000f);
+            public Color poweredByBatteries = new Color(0.478f, 1.000f, 0.482f, 1.000f);
+            public Color notPowered = new Color(1.000f, 0.408f, 0.392f, 1.000f);
             public Color powererOff = Color.gray;
 
             public Color mining = miningColorDefault;
@@ -117,27 +117,26 @@ namespace BetterMiniMap
             public OverlayColors() => this.SetFadedColors();
 
             public void ExposeData()
-            {
+			{
                 Scribe_Values.Look(ref viewpoint, "viewpoint", Color.black);
-                //Scribe_Values.Look(ref viewpointFaded, "viewpointFaded", Color.black);
-                Scribe_Values.Look(ref fog, "fog", Color.gray);
+                Scribe_Values.Look(ref fog, "fog", darkGray);
                 Scribe_Values.Look(ref buildings, "buildings", Color.white);
 
-                Scribe_Values.Look(ref colonists, "colonists", Color.green);
-                Scribe_Values.Look(ref tamedAnimals, "tamedAnimals", Color.green);
+                Scribe_Values.Look(ref colonists, "colonists", new Color(0.020f, 0.996f, 0.043f, 1.000f));
+                Scribe_Values.Look(ref tamedAnimals, "tamedAnimals", new Color(0.310f, 1.000f, 0.965f, 1.000f));
                 Scribe_Values.Look(ref enemyPawns, "enemyPawns", Color.red);
                 Scribe_Values.Look(ref traderPawns, "traderPawns", Color.blue);
-                Scribe_Values.Look(ref visitorPawns, "visitorPawns", Color.green);
-                Scribe_Values.Look(ref robots, "robots", Color.white);
-                Scribe_Values.Look(ref ships, "ships", Color.red);
+                Scribe_Values.Look(ref visitorPawns, "visitorPawns", new Color(1.000f, 0.647f, 0.039f, 1.000f));
+                Scribe_Values.Look(ref robots, "robots", new Color(0.357f, 0.000f, 0.565f, 1.000f));
+                Scribe_Values.Look(ref ships, "ships", new Color(1.000f, 0.384f, 0.384f, 1.000f));
                 Scribe_Values.Look(ref wildlife, "wildlife", Color.yellow);
-                Scribe_Values.Look(ref wildlifeTaming, "wildlifeTaming", Color.green);
-                Scribe_Values.Look(ref wildlifeHunting, "wildlifeHunting", Color.red);
-                Scribe_Values.Look(ref wildlifeHostiles, "wildlifeHostiles", Color.red);
+                Scribe_Values.Look(ref wildlifeTaming, "wildlifeTaming", new Color(0.020f, 1.000f, 0.431f, 1.000f));
+                Scribe_Values.Look(ref wildlifeHunting, "wildlifeHunting", new Color(0.961f, 0.004f, 0.443f, 1.000f));
+                Scribe_Values.Look(ref wildlifeHostiles, "wildlifeHostiles", new Color(0.588f, 0.004f, 0.000f, 1.000f));
                 
-                Scribe_Values.Look(ref poweredOn, "poweredOn", Color.yellow);
-                Scribe_Values.Look(ref poweredByBatteries, "poweredByBatteries", Color.green);
-                Scribe_Values.Look(ref notPowered, "notPowered", Color.red);
+                Scribe_Values.Look(ref poweredOn, "poweredOn", new Color(0.937f, 1.000f, 0.616f, 1.000f));
+                Scribe_Values.Look(ref poweredByBatteries, "poweredByBatteries", new Color(0.478f, 1.000f, 0.482f, 1.000f));
+                Scribe_Values.Look(ref notPowered, "notPowered", new Color(1.000f, 0.408f, 0.392f, 1.000f));
                 Scribe_Values.Look(ref powererOff, "powererOff", Color.gray);
 
                 Scribe_Values.Look(ref mining, "mining", miningColorDefault);

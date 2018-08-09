@@ -88,7 +88,6 @@ namespace BetterMiniMap
 			{
 				this.overlayTerrain,
 				this.overlayColonists,
-				this.overlayMining,
 				this.overlayNoncolonist,
 				this.overlayBuilding,
 				this.overlayPower,
@@ -96,6 +95,7 @@ namespace BetterMiniMap
 				this.overlayShips,
 				this.overlayRobots,
 				this.overlayFog,
+				this.overlayMining,
 				this.overlayFoundObjects,
 				this.overlayView
             };

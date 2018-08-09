@@ -5,7 +5,7 @@ namespace BetterMiniMap.Overlays
 {
 	public class Fog_Overlay : Overlay
 	{
-        public Fog_Overlay(bool visible = true) : base(visible) { }
+        public Fog_Overlay() : base(!BetterMiniMapMod.settings.disableFog) { }
 
         public void Update() => base.Update(false);
 
@@ -22,5 +22,12 @@ namespace BetterMiniMap.Overlays
 
 		public override int GetUpdateInterval() => BetterMiniMapMod.settings.updatePeriods.fog;
 
+		public override bool GetShouldUpdateOverlay()
+		{
+			bool shouldUpdate = base.GetShouldUpdateOverlay();
+			if (Visible == BetterMiniMapMod.settings.disableFog)
+				Visible = !Visible;
+			return shouldUpdate;
+		}
 	}
 }

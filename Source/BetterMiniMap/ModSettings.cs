@@ -6,7 +6,7 @@ using ColorPicker.Dialog;
 namespace BetterMiniMap
 {
     class BetterMiniMapSettings : ModSettings
-    {
+	{
         // TODO: look at clustering these parameters better in a struct/class => fix GetIndicatorProperities()
         #region NestedClasses
         public class UpdatePeriods : IExposable
@@ -41,7 +41,7 @@ namespace BetterMiniMap
             }
         }
 
-        public class IndicatorSizes : IExposable // BMME changed
+        public class IndicatorSizes : IExposable
 		{
             public float colonists = 4f;
             public float tamedAnimals = 2f;
@@ -71,7 +71,7 @@ namespace BetterMiniMap
             }
         }
 
-        public class OverlayColors : IExposable // BMME changed
+        public class OverlayColors : IExposable
 		{
             private static readonly Color miningColorDefault = new Color(0.75f, 0.4f, 0.125f, 1f);
             //private static readonly Color fadedBlack = new Color(0, 0, 0, 0.25f);
@@ -175,20 +175,22 @@ namespace BetterMiniMap
         public UpdatePeriods updatePeriods;
         public IndicatorSizes indicatorSizes;
         public OverlayColors overlayColors;
+		public bool disableFog = false;
 
-        // HIDDEN SETTINGS
-        public bool mipMaps = false;
+		// HIDDEN SETTINGS
+		public bool mipMaps = false;
         public int anisoLevel = 1;
 
-        public override void ExposeData()
+        public override void ExposeData() 
         {
             base.ExposeData();
             Scribe_Deep.Look(ref this.updatePeriods, "updatePeriods");
             Scribe_Deep.Look(ref this.indicatorSizes, "indicatorSizes");
             Scribe_Deep.Look(ref this.overlayColors, "overlayColors");
+			Scribe_Values.Look<bool>(ref this.disableFog, "disableFog", false);
 
-            // HIDDEN SETTINGS
-            Scribe_Values.Look<bool>(ref this.mipMaps, "mipMaps", false);
+			// HIDDEN SETTINGS
+			Scribe_Values.Look<bool>(ref this.mipMaps, "mipMaps", false);
             Scribe_Values.Look<int>(ref this.anisoLevel, "anisoLevel", 1);
 
             // Handles upgrading settings
@@ -225,7 +227,7 @@ namespace BetterMiniMap
         public override string SettingsCategory() => "BMM_SettingsCategoryLabel".Translate();
 
         public override void DoSettingsWindowContents(Rect rect)
-        {
+		{
             rect.height += 50f;
             Listing_Standard listing_Standard = new Listing_Standard() { ColumnWidth = (rect.width / 3f) - 15f };
             listing_Standard.Begin(rect);
@@ -246,7 +248,9 @@ namespace BetterMiniMap
             listing_Standard.AddLabeledNumericalTextField<int>("BMM_FogOverlayLabel".Translate(), ref settings.updatePeriods.fog, 0.75f);
             listing_Standard.AddLabeledNumericalTextField<int>("BMM_ViewpointOverlayLabel".Translate(), ref settings.updatePeriods.viewpoint, 0.75f);
 
-            listing_Standard.NewColumn();
+			listing_Standard.AddLabeledCheckbox("Disable fog", ref settings.disableFog); // TODO: Translate
+
+			listing_Standard.NewColumn();
 
             // IndicatorSizes
             listing_Standard.AddLabelLine("BMM_IndicatorSizeLabel".Translate());

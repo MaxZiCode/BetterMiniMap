@@ -64,7 +64,7 @@ namespace BetterMiniMap
 
 			foreach (IntVec3 location in cellsLocations)
 			{
-				if (CurrentMap.fogGrid.IsFogged(location))
+				if (CurrentMap.fogGrid.IsFogged(location) && !BetterMiniMapMod.settings.disableFog)
 					continue;
 				FillData<TerrainDef>(location, location.GetTerrain(CurrentMap).label, CategoryOfObjects.Terrains);
 				List <Thing> allThingsOnLocation = location.GetThingList(CurrentMap);

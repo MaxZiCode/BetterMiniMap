@@ -47,7 +47,15 @@ namespace BetterMiniMap.Overlays
                 }
             }
 
-            color = BetterMiniMapMod.settings.overlayColors.wildlife;
+			if (pawn.def.race.predator)
+			{
+				color = BetterMiniMapMod.settings.overlayColors.wildlifePredators;
+				edgeColor = BetterMiniMapMod.settings.overlayColors.wildlifePredatorsFaded;
+				radius = BetterMiniMapMod.settings.indicatorSizes.wildlifePredators;
+				return;
+			}
+
+			color = BetterMiniMapMod.settings.overlayColors.wildlife;
             edgeColor = BetterMiniMapMod.settings.overlayColors.wildlifeFaded;
             radius = BetterMiniMapMod.settings.indicatorSizes.wildlife;
             return; 

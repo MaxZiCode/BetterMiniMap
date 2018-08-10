@@ -53,7 +53,8 @@ namespace BetterMiniMap
             public float wildlife = 2f;
             public float wildlifeTaming = 3f;
             public float wildlifeHunting = 3f;
-            public float wildlifeHostiles = 3f;
+            public float wildlifeHostiles = 4f;
+			public float wildlifePredators = 3f;
 
             public void ExposeData()
             {
@@ -67,8 +68,9 @@ namespace BetterMiniMap
                 Scribe_Values.Look(ref this.wildlife, "wildlife", 2f);
                 Scribe_Values.Look(ref this.wildlifeTaming, "wildlifeTaming", 3f);
                 Scribe_Values.Look(ref this.wildlifeHunting, "wildlifeHunting", 3f);
-                Scribe_Values.Look(ref this.wildlifeHostiles, "wildlifeHostiles", 3f);
-            }
+                Scribe_Values.Look(ref this.wildlifeHostiles, "wildlifeHostiles", 4f);
+				Scribe_Values.Look(ref this.wildlifePredators, "wildlifePredators", 3f);
+			}
         }
 
         public class OverlayColors : IExposable
@@ -85,13 +87,14 @@ namespace BetterMiniMap
             public Color tamedAnimals = new Color(0.310f, 1.000f, 0.965f, 1.000f);
             public Color enemyPawns = Color.red;
             public Color traderPawns = Color.blue;
-            public Color visitorPawns = new Color(1.000f, 0.647f, 0.039f, 1.000f);
-            public Color robots = new Color(0.357f, 0.000f, 0.565f, 1.000f);
-            public Color ships = new Color(1.000f, 0.384f, 0.384f, 1.000f);
+            public Color visitorPawns = new Color(0.992f, 0.757f, 1.000f, 1.000f);
+            public Color robots = new Color(0.537f, 0.522f, 0.996f, 1.000f);
+            public Color ships = new Color(0.682f, 0.000f, 0.855f, 1.000f);
             public Color wildlife = Color.yellow;
             public Color wildlifeTaming = new Color(0.020f, 1.000f, 0.431f, 1.000f);
-            public Color wildlifeHunting = new Color(0.961f, 0.004f, 0.443f, 1.000f);
-            public Color wildlifeHostiles = new Color(0.588f, 0.004f, 0.000f, 1.000f);
+            public Color wildlifeHunting = new Color(0.996f, 0.435f, 0.643f, 1.000f);
+            public Color wildlifeHostiles = new Color(0.671f, 0.000f, 0.157f, 1.000f);
+			public Color wildlifePredators = Color.red;
 
             // used for edge colors
             public Color viewpointFaded;
@@ -106,8 +109,10 @@ namespace BetterMiniMap
             public Color wildlifeTamingFaded;
             public Color wildlifeHuntingFaded;
             public Color wildlifeHostilesFaded;
+			public Color wildlifePredatorsFaded;
 
-            public Color poweredOn = new Color(0.937f, 1.000f, 0.616f, 1.000f);
+
+			public Color poweredOn = new Color(0.937f, 1.000f, 0.616f, 1.000f);
             public Color poweredByBatteries = new Color(0.478f, 1.000f, 0.482f, 1.000f);
             public Color notPowered = new Color(1.000f, 0.408f, 0.392f, 1.000f);
             public Color powererOff = Color.gray;
@@ -126,15 +131,16 @@ namespace BetterMiniMap
                 Scribe_Values.Look(ref tamedAnimals, "tamedAnimals", new Color(0.310f, 1.000f, 0.965f, 1.000f));
                 Scribe_Values.Look(ref enemyPawns, "enemyPawns", Color.red);
                 Scribe_Values.Look(ref traderPawns, "traderPawns", Color.blue);
-                Scribe_Values.Look(ref visitorPawns, "visitorPawns", new Color(1.000f, 0.647f, 0.039f, 1.000f));
-                Scribe_Values.Look(ref robots, "robots", new Color(0.357f, 0.000f, 0.565f, 1.000f));
-                Scribe_Values.Look(ref ships, "ships", new Color(1.000f, 0.384f, 0.384f, 1.000f));
+                Scribe_Values.Look(ref visitorPawns, "visitorPawns", new Color(0.992f, 0.757f, 1.000f, 1.000f));
+                Scribe_Values.Look(ref robots, "robots", new Color(0.537f, 0.522f, 0.996f, 1.000f));
+                Scribe_Values.Look(ref ships, "ships", new Color(0.682f, 0.000f, 0.855f, 1.000f));
                 Scribe_Values.Look(ref wildlife, "wildlife", Color.yellow);
                 Scribe_Values.Look(ref wildlifeTaming, "wildlifeTaming", new Color(0.020f, 1.000f, 0.431f, 1.000f));
-                Scribe_Values.Look(ref wildlifeHunting, "wildlifeHunting", new Color(0.961f, 0.004f, 0.443f, 1.000f));
-                Scribe_Values.Look(ref wildlifeHostiles, "wildlifeHostiles", new Color(0.588f, 0.004f, 0.000f, 1.000f));
-                
-                Scribe_Values.Look(ref poweredOn, "poweredOn", new Color(0.937f, 1.000f, 0.616f, 1.000f));
+                Scribe_Values.Look(ref wildlifeHunting, "wildlifeHunting", new Color(0.996f, 0.435f, 0.643f, 1.000f));
+                Scribe_Values.Look(ref wildlifeHostiles, "wildlifeHostiles", new Color(0.671f, 0.000f, 0.157f, 1.000f));
+				Scribe_Values.Look(ref wildlifePredators, "wildlifePredators", Color.red);
+
+				Scribe_Values.Look(ref poweredOn, "poweredOn", new Color(0.937f, 1.000f, 0.616f, 1.000f));
                 Scribe_Values.Look(ref poweredByBatteries, "poweredByBatteries", new Color(0.478f, 1.000f, 0.482f, 1.000f));
                 Scribe_Values.Look(ref notPowered, "notPowered", new Color(1.000f, 0.408f, 0.392f, 1.000f));
                 Scribe_Values.Look(ref powererOff, "powererOff", Color.gray);
@@ -159,7 +165,8 @@ namespace BetterMiniMap
                 this.wildlifeTamingFaded = BetterMiniMapSettings.FadedColor(this.wildlifeTaming);
                 this.wildlifeHuntingFaded = BetterMiniMapSettings.FadedColor(this.wildlifeHunting);
                 this.wildlifeHostilesFaded = BetterMiniMapSettings.FadedColor(this.wildlifeHostiles);
-            }
+				this.wildlifePredatorsFaded = BetterMiniMapSettings.FadedColor(this.wildlifePredators);
+			}
         }
         #endregion NestedClasses
 
@@ -263,11 +270,12 @@ namespace BetterMiniMap
             listing_Standard.AddLabeledNumericalTextField<float>("BMM_VisitorIndicatorSizeLabel".Translate(), ref settings.indicatorSizes.visitorPawns, 0.9f, 1f, 9f);
             listing_Standard.AddLabeledNumericalTextField<float>("BMM_ShipsIndicatorSizeLabel".Translate(), ref settings.indicatorSizes.ships, 0.9f, 1f, 9f);
             listing_Standard.AddLabeledNumericalTextField<float>("BMM_WildlifeIndicatorSizeLabel".Translate(), ref settings.indicatorSizes.wildlife, 0.9f, 1f, 9f);
-            listing_Standard.AddLabeledNumericalTextField<float>("BMM_TamingIndicatorSizeLabel".Translate(), ref settings.indicatorSizes.wildlifeTaming, 0.9f, 1f, 9f);
+			listing_Standard.AddLabeledNumericalTextField<float>("Predators".Translate(), ref settings.indicatorSizes.wildlifePredators, 0.9f, 1f, 9f); // TODO: Translate
+			listing_Standard.AddLabeledNumericalTextField<float>("BMM_TamingIndicatorSizeLabel".Translate(), ref settings.indicatorSizes.wildlifeTaming, 0.9f, 1f, 9f);
             listing_Standard.AddLabeledNumericalTextField<float>("BMM_HostileAnimalIndicatorSizeLabel".Translate(), ref settings.indicatorSizes.wildlifeHostiles, 0.9f, 1f, 9f);
             listing_Standard.AddLabeledNumericalTextField<float>("BMM_HuntingIndicatorSizeLabel".Translate(), ref settings.indicatorSizes.wildlifeHunting, 0.9f, 1f, 9f);
 
-            listing_Standard.NewColumn();
+			listing_Standard.NewColumn();
 
             listing_Standard.AddLabelLine("BMM_ColorPickersLabel".Translate());
 
@@ -312,7 +320,11 @@ namespace BetterMiniMap
                 settings.overlayColors.wildlife = scw.SelectedColor;
                 settings.overlayColors.wildlifeFaded = BetterMiniMapSettings.FadedColor(scw.SelectedColor);
             });
-            listing_Standard.AddColorPickerButton("BMM_TamingIndicatorSizeLabel".Translate(), settings.overlayColors.wildlifeTaming, (SelectionColorWidget scw) => {
+			listing_Standard.AddColorPickerButton("Predators".Translate(), settings.overlayColors.wildlifePredators, (SelectionColorWidget scw) => { // TODO: Translate
+				settings.overlayColors.wildlifePredators = scw.SelectedColor;
+				settings.overlayColors.wildlifePredatorsFaded = BetterMiniMapSettings.FadedColor(scw.SelectedColor);
+			});
+			listing_Standard.AddColorPickerButton("BMM_TamingIndicatorSizeLabel".Translate(), settings.overlayColors.wildlifeTaming, (SelectionColorWidget scw) => {
                 settings.overlayColors.wildlifeTaming = scw.SelectedColor;
                 settings.overlayColors.wildlifeTamingFaded = BetterMiniMapSettings.FadedColor(scw.SelectedColor);
             });
@@ -325,7 +337,7 @@ namespace BetterMiniMap
                 settings.overlayColors.wildlifeHostilesFaded = BetterMiniMapSettings.FadedColor(scw.SelectedColor);
             });
 
-            listing_Standard.AddColorPickerButton("BMM_PoweredOnLabel".Translate(), settings.overlayColors.poweredOn, (SelectionColorWidget scw) => { settings.overlayColors.poweredOn = scw.SelectedColor; });
+			listing_Standard.AddColorPickerButton("BMM_PoweredOnLabel".Translate(), settings.overlayColors.poweredOn, (SelectionColorWidget scw) => { settings.overlayColors.poweredOn = scw.SelectedColor; });
             listing_Standard.AddColorPickerButton("BMM_PoweredByBatteriesLabel".Translate(), settings.overlayColors.poweredByBatteries, (SelectionColorWidget scw) => { settings.overlayColors.poweredByBatteries = scw.SelectedColor; });
             listing_Standard.AddColorPickerButton("BMM_NotPoweredLabel".Translate(), settings.overlayColors.notPowered, (SelectionColorWidget scw) => { settings.overlayColors.notPowered = scw.SelectedColor; });
             listing_Standard.AddColorPickerButton("BMM_PoweredOffLabel".Translate(), settings.overlayColors.powererOff, (SelectionColorWidget scw) => { settings.overlayColors.powererOff = scw.SelectedColor; });

@@ -255,7 +255,7 @@ namespace BetterMiniMap
             listing_Standard.AddLabeledNumericalTextField<int>("BMM_FogOverlayLabel".Translate(), ref settings.updatePeriods.fog, 0.75f);
             listing_Standard.AddLabeledNumericalTextField<int>("BMM_ViewpointOverlayLabel".Translate(), ref settings.updatePeriods.viewpoint, 0.75f);
 
-			listing_Standard.AddLabeledCheckbox("Disable fog", ref settings.disableFog); // TODO: Translate
+			listing_Standard.AddLabeledCheckbox("BMME_DisableFogLabel".Translate(), ref settings.disableFog);
 
 			listing_Standard.NewColumn();
 
@@ -270,7 +270,7 @@ namespace BetterMiniMap
             listing_Standard.AddLabeledNumericalTextField<float>("BMM_VisitorIndicatorSizeLabel".Translate(), ref settings.indicatorSizes.visitorPawns, 0.9f, 1f, 9f);
             listing_Standard.AddLabeledNumericalTextField<float>("BMM_ShipsIndicatorSizeLabel".Translate(), ref settings.indicatorSizes.ships, 0.9f, 1f, 9f);
             listing_Standard.AddLabeledNumericalTextField<float>("BMM_WildlifeIndicatorSizeLabel".Translate(), ref settings.indicatorSizes.wildlife, 0.9f, 1f, 9f);
-			listing_Standard.AddLabeledNumericalTextField<float>("Predators".Translate(), ref settings.indicatorSizes.wildlifePredators, 0.9f, 1f, 9f); // TODO: Translate
+			listing_Standard.AddLabeledNumericalTextField<float>("BMME_WildlifePredatorsSizeLabel".Translate(), ref settings.indicatorSizes.wildlifePredators, 0.9f, 1f, 9f);
 			listing_Standard.AddLabeledNumericalTextField<float>("BMM_TamingIndicatorSizeLabel".Translate(), ref settings.indicatorSizes.wildlifeTaming, 0.9f, 1f, 9f);
             listing_Standard.AddLabeledNumericalTextField<float>("BMM_HostileAnimalIndicatorSizeLabel".Translate(), ref settings.indicatorSizes.wildlifeHostiles, 0.9f, 1f, 9f);
             listing_Standard.AddLabeledNumericalTextField<float>("BMM_HuntingIndicatorSizeLabel".Translate(), ref settings.indicatorSizes.wildlifeHunting, 0.9f, 1f, 9f);
@@ -320,7 +320,7 @@ namespace BetterMiniMap
                 settings.overlayColors.wildlife = scw.SelectedColor;
                 settings.overlayColors.wildlifeFaded = BetterMiniMapSettings.FadedColor(scw.SelectedColor);
             });
-			listing_Standard.AddColorPickerButton("Predators".Translate(), settings.overlayColors.wildlifePredators, (SelectionColorWidget scw) => { // TODO: Translate
+			listing_Standard.AddColorPickerButton("BMME_WildlifePredatorsSizeLabel".Translate(), settings.overlayColors.wildlifePredators, (SelectionColorWidget scw) => {
 				settings.overlayColors.wildlifePredators = scw.SelectedColor;
 				settings.overlayColors.wildlifePredatorsFaded = BetterMiniMapSettings.FadedColor(scw.SelectedColor);
 			});

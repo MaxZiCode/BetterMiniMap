@@ -24,7 +24,7 @@ namespace BetterMiniMap
 		public override void PreOpen()
 		{
 			base.PreOpen();
-			if (SWD.AllLocations.Count == 0 || SWD.CurrentMap != Find.VisibleMap)
+			if (SWD.LocationsDict.Count == 0 || SWD.MapInProcess != Find.VisibleMap)
 				SWD.FindAllThings();
 		}
 
@@ -45,37 +45,36 @@ namespace BetterMiniMap
 			}
 			if (Widgets.ButtonText(clearButtonRect, "BMME_ClearButtonLabel".Translate()))
 			{
-				SWD.ThingToRender = string.Empty;
-				FoundObjects_Overlay.HasUpdated = false;
+				SWD.ThingToSeek = string.Empty;
 			}
 
 			float curY = updateButtonRect.yMax;
 			string partOfCategoryLabel = "BMME_CategoryLabel".Translate() + ": ";
-			Widgets.ListSeparator(ref curY, inRect.width, partOfCategoryLabel + " " + SWD.SelectedCategoryString);
+			Widgets.ListSeparator(ref curY, inRect.width, partOfCategoryLabel + " " + SWD.SelectedCategoryName);
 			Rect categoryButtonRect = new Rect(inRect.x, updateButtonRect.yMax, inRect.width, curY - updateButtonRect.yMax);
 			if (Widgets.ButtonInvisible(categoryButtonRect))
 				Find.WindowStack.Add(SWD.CategoryMenu);
 			Widgets.DrawHighlightIfMouseover(categoryButtonRect);
 
-			if (!SWD.ObjectsCategories.ContainsKey(SWD.SelectedCategory))
+			if (!SWD.CategoriesDict.ContainsKey(SWD.SelectedCategory))
 			{
-				Widgets.Label(new Rect(titleRect) { y = curY },   "BMME_NotFoundString".Translate(SWD.SelectedCategoryString));
+				Widgets.Label(new Rect(titleRect) { y = curY },   "BMME_NotFoundString".Translate(SWD.SelectedCategoryName));
 				return;
 			}
 			Rect mainRect = new Rect(inRect){ yMin = curY };
-			Rect rect1 = new Rect(0.0f, 0.0f, mainRect.width - 16f, (SWD.ObjectsCategories[SWD.SelectedCategory].Count + 1) * Text.LineHeight);
+			Rect rect1 = new Rect(0.0f, 0.0f, mainRect.width - 16f, (SWD.CategoriesDict[SWD.SelectedCategory].Count + 1) * Text.LineHeight);
 			curY = rect1.y;
 
 			Widgets.BeginScrollView(mainRect, ref ScrollPosition, rect1, true);
 			GUI.BeginGroup(rect1);
 			curY += this.GroupOfThingsMaker(rect1.x, curY, rect1.width, "BMME_NameLabel".Translate(), SWD.SelectedCategory == SelectWindowData.CategoryOfObjects.Corpses? "BMME_TimeUntilRotted".Translate() : "BMME_CellsCountLabel".Translate(), false);
 
-			SWD.ObjectsCategories[SWD.SelectedCategory].Sort();
+			SWD.CategoriesDict[SWD.SelectedCategory].Sort();
 			if (SWD.SelectedCategory == SelectWindowData.CategoryOfObjects.Corpses)
-				SWD.ObjectsCategories[SWD.SelectedCategory].Sort(SWD);
-			foreach (string currentName in SWD.ObjectsCategories[SWD.SelectedCategory])
+				SWD.CategoriesDict[SWD.SelectedCategory].Sort(SWD);
+			foreach (string currentName in SWD.CategoriesDict[SWD.SelectedCategory])
 			{
-				string param = SWD.SelectedCategory == SelectWindowData.CategoryOfObjects.Corpses ? SWD.CorpsesTimeRemain[currentName] > 0 ? SWD.CorpsesTimeRemain[currentName].ToStringTicksToDays() : "-" : SWD.AllLocations[currentName].Count.ToString();
+				string param = SWD.SelectedCategory == SelectWindowData.CategoryOfObjects.Corpses ? (SWD.CorpsesTimeRemainDict[currentName] > 0 ? SWD.CorpsesTimeRemainDict[currentName].ToStringTicksToDays() : "-") : SWD.LocationsDict[currentName]?.Count.ToString();
 				curY += this.GroupOfThingsMaker(rect1.x, curY, rect1.width, currentName, param);
 			}
 			GUI.EndGroup();
@@ -90,14 +89,13 @@ namespace BetterMiniMap
 		{
 			Rect rectLabel = new Rect(x, y, width, Text.LineHeight);
 
-			if (label == SWD.ThingToRender)
+			if (label == SWD.ThingToSeek)
 				Widgets.DrawHighlightSelected(rectLabel);
 			else if(createFindButton)
 			{
 				if (Widgets.ButtonInvisible(rectLabel))
 				{
-					SWD.ThingToRender = label;
-					FoundObjects_Overlay.HasUpdated = false;
+					SWD.ThingToSeek = label;
 				}
 				Widgets.DrawHighlightIfMouseover(rectLabel);
 			}

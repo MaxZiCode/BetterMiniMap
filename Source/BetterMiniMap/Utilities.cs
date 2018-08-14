@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -7,6 +8,8 @@ namespace BetterMiniMap
 	public static class Utilities
 	{
 		private static Color32[] clearPixelArray;
+
+		public static readonly DesignationDef FoundDesignationDef = DefDatabase<DesignationDef>.GetNamed("Found", true);
 
 		private static int size = -1; // NOTE: size is instead of mapID. Because mapID doesn't work correctly
 
@@ -26,5 +29,19 @@ namespace BetterMiniMap
 			}
 		}
 
+		public static void RemoveDesignations()
+		{
+			DesignationManager designManager = Find.VisibleMap.designationManager;
+			List<Designation> gameDesignations = designManager.allDesignations;
+			List<Designation> totalDesignations = gameDesignations.ListFullCopy();
+			for (int i = 0; i < totalDesignations.ListFullCopy().Count; i++)
+			{
+				Designation des = totalDesignations[i];
+				if (des.def == FoundDesignationDef)
+				{
+					gameDesignations.Remove(des);
+				}
+			}
+		}
 	}
 }

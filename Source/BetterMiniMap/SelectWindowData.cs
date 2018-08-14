@@ -11,16 +11,19 @@ namespace BetterMiniMap
 	public class SelectWindowData : IComparer<string>
 	{
 		readonly List<FloatMenuOption> _floatMenuCategoriesOpt;
+		private string _thingToSeek;
+		private bool _wasUpdated;
 
 		public SelectWindowData()
 		{
-			AllLocations = new Dictionary<string, List<IntVec3>>{ { String.Empty, new List<IntVec3>() } };
-			ObjectsCategories = new Dictionary<CategoryOfObjects, List<string>>();
-			CorpsesTimeRemain = new Dictionary<string, int>();
-			ThingToRender = string.Empty;
+			LocationsDict = new Dictionary<string, List<IntVec3>> { { String.Empty, new List<IntVec3>() } };
+			CategoriesDict = new Dictionary<CategoryOfObjects, List<string>>();
+			CorpsesTimeRemainDict = new Dictionary<string, int>();
+			_thingToSeek = string.Empty;
+			_wasUpdated = false;
 			SelectedCategory = CategoryOfObjects.Buildings;
-			CurrentMap = Find.VisibleMap;
-			
+			MapInProcess = Find.VisibleMap;
+
 			_floatMenuCategoriesOpt = new List<FloatMenuOption>()
 				{
 					new FloatMenuOption("BMME_BuildingCategoryLabel".Translate(), delegate{ SelectedCategory = CategoryOfObjects.Buildings; }),
@@ -32,42 +35,46 @@ namespace BetterMiniMap
 				};
 		}
 
-		public List<IntVec3> Positions
+		public List<IntVec3> Positions { get => LocationsDict[_thingToSeek]; }
+
+		public Dictionary<string, List<IntVec3>> LocationsDict { get; set; }
+		public Dictionary<CategoryOfObjects, List<string>> CategoriesDict { get; set; }
+		public Dictionary<string, int> CorpsesTimeRemainDict { get; set; }
+
+		public Map MapInProcess { get; set; }
+
+		public FloatMenu CategoryMenu { get => new FloatMenu(_floatMenuCategoriesOpt); }
+
+		public string ThingToSeek
 		{
-			get
+			get => _thingToSeek;
+			set
 			{
-				if (CurrentMap == Find.VisibleMap && AllLocations.ContainsKey(ThingToRender))
-					return AllLocations[ThingToRender];
-				else
-					return null;
+				_wasUpdated = true;
+				_thingToSeek = value;
 			}
 		}
-		
-		public Dictionary<string, List<IntVec3>> AllLocations { get; set; }
-		public Dictionary<CategoryOfObjects, List<string>> ObjectsCategories { get; set; }
-		public Dictionary<string, int> CorpsesTimeRemain { get; set; }
-		public Map CurrentMap { get; set; }
-		public FloatMenu CategoryMenu { get => new FloatMenu(_floatMenuCategoriesOpt); }
-		public string ThingToRender { get; set; }
-		public string SelectedCategoryString { get => _floatMenuCategoriesOpt[(int)SelectedCategory].Label; }
+		public string SelectedCategoryName { get => _floatMenuCategoriesOpt[(int)SelectedCategory].Label; }
+
+
 		public CategoryOfObjects SelectedCategory { get; set; }
 
 		public void FindAllThings()
 		{
-			CurrentMap = Find.VisibleMap;
-			IEnumerable<IntVec3> cellsLocations = CurrentMap.AllCells;
-			
-			ObjectsCategories.Clear();
-			CorpsesTimeRemain.Clear();
-			AllLocations.Clear();
-			AllLocations.Add(String.Empty, new List<IntVec3>());
+			MapInProcess = Find.VisibleMap;
+			IEnumerable<IntVec3> cellsLocations = MapInProcess.AllCells;
+
+			CategoriesDict.Clear();
+			CorpsesTimeRemainDict.Clear();
+			LocationsDict.Clear();
+			LocationsDict.Add(String.Empty, new List<IntVec3>());
 
 			foreach (IntVec3 location in cellsLocations)
 			{
-				if (CurrentMap.fogGrid.IsFogged(location) && !BetterMiniMapMod.settings.disableFog)
+				if (MapInProcess.fogGrid.IsFogged(location) && !BetterMiniMapMod.settings.disableFog)
 					continue;
-				FillData<TerrainDef>(location, location.GetTerrain(CurrentMap).label, CategoryOfObjects.Terrains);
-				List <Thing> allThingsOnLocation = location.GetThingList(CurrentMap);
+				FillData<TerrainDef>(location, location.GetTerrain(MapInProcess).label, CategoryOfObjects.Terrains);
+				List<Thing> allThingsOnLocation = location.GetThingList(MapInProcess);
 				if (allThingsOnLocation.Count > 0)
 				{
 					foreach (Thing currentThing in allThingsOnLocation)
@@ -83,16 +90,16 @@ namespace BetterMiniMap
 							CompRottable comp = ((Corpse)currentThing).GetComp<CompRottable>();
 							int currentTicksRemain = Mathf.RoundToInt(comp.PropsRot.TicksToRotStart - comp.RotProgress);
 							currentTicksRemain = currentTicksRemain > 0 ? currentTicksRemain : 0;
-							if (CorpsesTimeRemain.ContainsKey(label))
+							if (CorpsesTimeRemainDict.ContainsKey(label))
 							{
-								if (CorpsesTimeRemain[label] > currentTicksRemain && currentTicksRemain > 0)
-									CorpsesTimeRemain[label] = currentTicksRemain;
+								if (CorpsesTimeRemainDict[label] > currentTicksRemain && currentTicksRemain > 0)
+									CorpsesTimeRemainDict[label] = currentTicksRemain;
 							}
 							else
-								CorpsesTimeRemain.Add(label, currentTicksRemain);
+								CorpsesTimeRemainDict.Add(label, currentTicksRemain);
 							continue;
 						}
-						
+
 						if (currentThing.Stuff != null)
 							label = $"{label} ({currentThing.Stuff.LabelAsStuff})";
 
@@ -102,37 +109,49 @@ namespace BetterMiniMap
 					}
 				}
 			}
-			FoundObjects_Overlay.HasUpdated = false;
+			if (!this.LocationsDict.ContainsKey(this.ThingToSeek))
+				this.ThingToSeek = string.Empty;
+			_wasUpdated = true;
 		}
 
 		private bool FillData<T>(IntVec3 location, string label, CategoryOfObjects category, Thing currentThing = null)
 		{
 			if (currentThing is T || currentThing == null)
 			{
-				if (ObjectsCategories.ContainsKey(category))
+				if (CategoriesDict.ContainsKey(category))
 				{
-					if (!ObjectsCategories[category].Contains(label))
-						ObjectsCategories[category].Add(label);
+					if (!CategoriesDict[category].Contains(label))
+						CategoriesDict[category].Add(label);
 				}
 				else
-					ObjectsCategories.Add(category, new List<string>(new string[] { label }));
+					CategoriesDict.Add(category, new List<string>(new string[] { label }));
 
-				if (AllLocations.ContainsKey(label))
-					AllLocations[label].Add(location);
+				if (LocationsDict.ContainsKey(label))
+					LocationsDict[label].Add(location);
 				else
-					AllLocations.Add(label, new List<IntVec3>(new IntVec3[] { location }));
+					LocationsDict.Add(label, new List<IntVec3>(new IntVec3[] { location }));
 				return true;
 			}
 			else
 				return false;
 		}
-
+		
+		public bool WasUpdated()
+		{
+			if (_wasUpdated == true)
+			{
+				_wasUpdated = false;
+				return !_wasUpdated;
+			}
+			else
+				return _wasUpdated;
+		}
 
 		int IComparer<string>.Compare(string x, string y)
 		{
-			if (CorpsesTimeRemain[x] > 0 && CorpsesTimeRemain[x] < CorpsesTimeRemain[y] || CorpsesTimeRemain[y] == 0 && CorpsesTimeRemain[x] > 0)
+			if (CorpsesTimeRemainDict[x] > 0 && CorpsesTimeRemainDict[x] < CorpsesTimeRemainDict[y] || CorpsesTimeRemainDict[y] == 0 && CorpsesTimeRemainDict[x] > 0)
 				return -1;
-			if (CorpsesTimeRemain[x] > CorpsesTimeRemain[y] || CorpsesTimeRemain[x] == 0 && CorpsesTimeRemain[y] > 0)
+			if (CorpsesTimeRemainDict[x] > CorpsesTimeRemainDict[y] || CorpsesTimeRemainDict[x] == 0 && CorpsesTimeRemainDict[y] > 0)
 				return 1;
 			else
 				return 0;

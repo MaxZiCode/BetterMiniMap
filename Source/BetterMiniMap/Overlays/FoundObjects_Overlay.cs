@@ -10,48 +10,39 @@ namespace BetterMiniMap.Overlays
 {
 	public class FoundObjects_Overlay : MarkerOverlay
 	{
-		public static bool HasUpdated = false;
 		static readonly SelectWindowData _sWD = new SelectWindowData();
-		readonly DesignationDef posDef = DefDatabase<DesignationDef>.GetNamed("Found", true);
-		List<Designation> _previousDes = new List<Designation>();
-		Map _map;
 
 		public FoundObjects_Overlay(bool visible = true) : base(visible) { }
 
 		public static SelectWindowData SWD { get => _sWD;}
 
-		public override int GetUpdateInterval() => 10;
+		public override int GetUpdateInterval() => 20;
 
 		public override void Render()
 		{
-			if ( SWD.Positions != null && SWD.Positions.Count != 0)
+			if (_sWD.MapInProcess == Find.VisibleMap)
 			{
-				foreach (IntVec3 pos in SWD.Positions)
+				Utilities.RemoveDesignations();
+				if (_sWD.ThingToSeek != string.Empty && SWD.Positions.Count != 0)
 				{
-					base.CreateMarker(pos, 5, Color.black, Color.magenta, 0.3f);
+					IntVec3 prevPos = new IntVec3();
+					for (int i = 0; i < SWD.Positions.Count; i++)
+					{
+						IntVec3 pos = SWD.Positions[i];
+						if (pos == prevPos)
+							continue;
+						base.CreateMarker(pos, 5, Color.black, Color.magenta, 0.3f);
 
-					Designation des = new Designation(pos, posDef);
-					_previousDes.Add(des);
-					_map = Find.VisibleMap;
-					_map.designationManager.AddDesignation(des);
+						Find.VisibleMap.designationManager.AddDesignation(new Designation(pos, Utilities.FoundDesignationDef));
+						prevPos = pos;
+					} 
 				}
 			}
 		}
 
 		public override bool GetShouldUpdateOverlay()
 		{
-			if (!HasUpdated)
-			{
-				if (_previousDes.Count != 0 && _map != null)
-					foreach (var curDes in _previousDes)
-						_map.designationManager.RemoveDesignation(curDes);
-				_previousDes.Clear();
-
-				HasUpdated = true;
-				return true;
-			}
-			else
-				return false;
+			return _sWD.WasUpdated();
 		}
 	}
 }
